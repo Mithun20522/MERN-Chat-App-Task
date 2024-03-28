@@ -1,10 +1,17 @@
 import mongoose from 'mongoose';
 
 const chatSchema = new mongoose.Schema({
-    user:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
+    user:[{
+        userId:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        username:{
+            type: String,
+            ref: 'User'
+        }
+    }],
+    
     message:{
         type:String,
         trim:true,

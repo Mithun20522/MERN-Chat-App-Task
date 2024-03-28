@@ -6,6 +6,7 @@ import { Socket } from 'socket.io';
 import http from 'http';
 import cors from 'cors';
 import userRouter from './routes/user.route.js';
+import chatRouter from './routes/chat.route.js';
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ mongoose.connect(MONGO_DB_URL)
 
 // adding routes
 app.use('/api/user', userRouter);
+app.use('/api/chat/', chatRouter);
 
 //Server initialization
 app.listen(PORT, () => console.log(`Server started listening on PORT:${PORT}`));
