@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { Socket } from 'socket.io';
 import http from 'http';
 import path from 'path';
+import userRouter from './routes/user.route.js';
 
 dotenv.config();
 
@@ -21,6 +22,9 @@ mongoose.connect(MONGO_DB_URL)
     .then(() => console.log('MongoDB Connected'))
     .catch((err) => console.log(err));
 
+
+// adding routes
+app.use('/api/user', userRouter);
 
 //Server initialization
 app.listen(PORT, () => console.log(`Server started listening on PORT:${PORT}`));
