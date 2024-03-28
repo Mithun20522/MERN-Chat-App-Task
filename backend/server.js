@@ -2,15 +2,17 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
-import { Socket } from 'socket.io';
-import http from 'http';
 import cors from 'cors';
 import userRouter from './routes/user.route.js';
 import chatRouter from './routes/chat.route.js';
+import {createServer} from 'http';
+import { Server } from 'socket.io';
 
 dotenv.config();
 
 const app = express();
+const server = createServer(app);
+const io = new Server(server);
 
 app.use(express.json());
 app.use(cookieParser());
@@ -29,5 +31,11 @@ mongoose.connect(MONGO_DB_URL)
 app.use('/api/user', userRouter);
 app.use('/api/chat/', chatRouter);
 
+
+// socket.io connections
+io.on('connection', (socket) => {
+    console.log('New user connected: ', socket.id);
+})
+
 //Server initialization
-app.listen(PORT, () => console.log(`Server started listening on PORT:${PORT}`));
+server.listen(PORT, () => console.log(`Server started listening on PORT:${PORT}`));
