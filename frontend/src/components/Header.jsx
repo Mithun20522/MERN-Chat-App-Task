@@ -5,7 +5,9 @@ const Header = () => {
     const navigate = useNavigate();
  const handleLogOut = async() => {
     try {
-        const res = await fetch('http://localhost:4000/api/user/logout');
+        const res = await fetch('http://localhost:4000/api/user/logout', {
+            method: 'POST'
+        });
         const data = await res.json();
         if(res.ok){
             toast.success(data.message);
@@ -15,13 +17,14 @@ const Header = () => {
         }
         else{
             toast.error(data.message);
+            return;
         }
     } catch (error) {
         toast.error(error.message);
     }
  }
   return (
-    <header className='flex justify-end p-5 bg-sky-400'>
+    <header className='flex justify-end p-5'>
         <button onClick={handleLogOut} className='px-3 py-1  mr-7 rounded-md bg-slate-700 hover:bg-slate-900 text-white font-semibold text-sm'>Log out</button>
         <Toaster/>
     </header>

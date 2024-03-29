@@ -7,12 +7,11 @@ export const verifyUser = async(req, res, next) => {
 
         const decodedToken = jwt.verify(token, process.env.SECRET_TOKEN_KEY);
         req.userId = decodedToken.userId;
-
         const id = req.params.id;
 
         if(id !== decodedToken.userId) return res.status(403).json({message: 'Access denied'});
         next();
     } catch (error) {
-        return res.status(500).json({error:error});
+        return res.status(500).json({error:error.message});
     }
 }

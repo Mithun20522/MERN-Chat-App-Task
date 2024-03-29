@@ -4,7 +4,7 @@ import Chat from '../components/Chat'
 
 const Home = () => {
   return (
-    <div>
+    <div className='homepage min-h-screen'>
       <Header/>
       <Chat/>
     </div>
