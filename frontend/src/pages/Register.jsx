@@ -1,30 +1,82 @@
-import React from 'react'
+import React, { useState } from 'react'
+import {Link, useNavigate} from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Register = () => {
+  const [formData, setFormData] = useState({});
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const res = await fetch('http://localhost:4000/api/user/register',{
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify(formData)
+      })
+      const data = await res.json();
+      if(res.ok){
+        setLoading(false);
+        toast.success('Sign Up Successfull.');
+        setTimeout(() => {
+          navigate('/login');
+        }, 500);
+      }
+      else{
+        setLoading(false);
+        toast.error(data.message);
+        return;
+      }
+      
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+  
   return (
     <div className='max-w-lg mx-auto p-3 mt-20'>
         <h1 className='text-3xl text-center mb-5'>Register Here</h1>
-        <form className='flex flex-col gap-5'>
+        <form className='flex flex-col gap-5' onSubmit={handleSubmit}>
             <input 
             type="text" 
-            name='username' 
-            placeholder='john' 
-            className='border  placeholder:text-slate-500 p-3 rounded-md text-center' 
+            id='username' 
+            placeholder='john'
+            onChange={handleChange} 
+            className='border focus:outline-none placeholder:text-slate-500 p-3 rounded-md text-center' 
             />
             <input 
             type="email" 
-            name='email' 
+            id='email' 
             placeholder='john@example.com' 
-            className='border placeholder:text-slate-500 p-3 rounded-md text-center' 
+            onChange={handleChange} 
+            className='border focus:outline-none placeholder:text-slate-500 p-3 rounded-md text-center' 
             />
             <input 
             type="password" 
-            name='password' 
+            id='password' 
             placeholder='*********' 
-            className='border placeholder:text-slate-500 p-3 rounded-md text-center'  
+            onChange={handleChange} 
+            className='border focus:outline-none placeholder:text-slate-500 p-3 rounded-md text-center'  
             />
-            <button className='p-3 text-white font-semibold bg-slate-600 hover:bg-slate-800 rounded-md'>Register</button>
+            <button disabled={loading} className='p-3 text-white font-semibold bg-slate-700 hover:bg-slate-900 rounded-md'>
+            {
+            loading ? 'loading...' : 'Register'
+          }
+            </button>
         </form>
+        <Toaster/>
     </div>
   )
 }
