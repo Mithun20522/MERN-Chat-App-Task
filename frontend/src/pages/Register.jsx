@@ -75,6 +75,12 @@ const Register = () => {
             loading ? 'loading...' : 'Register'
           }
             </button>
+            <div className='space-x-1'>
+              <span className=' p-1 font-medium'>Have an account?</span>
+              <Link to={'/login'} className='hover:underline text-blue-600 font-semibold'>
+                Log in
+              </Link>
+            </div>
         </form>
         <Toaster/>
     </div>

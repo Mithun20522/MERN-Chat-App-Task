@@ -68,6 +68,12 @@ const Login = () => {
             loading ? 'loading...' : 'Log in'
           }
             </button>
+            <div className='space-x-1'>
+              <span className=' p-1 font-medium'>Don't have an account?</span>
+              <Link to={'/register'} className='hover:underline text-blue-600 font-semibold'>
+                Register
+              </Link>
+            </div>
         </form>
         <Toaster/>
     </div>
