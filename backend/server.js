@@ -34,6 +34,9 @@ mongoose.connect(MONGO_DB_URL)
 
 
 // adding routes
+app.get('/',(req, res) => {
+    res.send({message: 'Test API working'});
+})
 app.use('/api/user', userRouter);
 app.use('/api/chat/', chatRouter);
 
