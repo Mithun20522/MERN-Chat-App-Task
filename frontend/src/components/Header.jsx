@@ -5,7 +5,7 @@ const Header = () => {
     const navigate = useNavigate();
  const handleLogOut = async() => {
     try {
-        const res = await fetch('http://localhost:4000/api/user/logout', {
+        const res = await fetch('https://mern-chat-app-task-production.up.railway.app/api/user/logout', {
             method: 'POST'
         });
         const data = await res.json();

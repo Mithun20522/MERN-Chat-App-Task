@@ -15,17 +15,17 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server,{
     cors: {
-        origin: "https://wysa-mern-chat-task.netlify.app/",
+        origin: "https://wysa-mern-chat-task.netlify.app",
         methods: ["POST", "GET"],
         credentials: true
       }
     
 });
 
-const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
+// app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 const MONGO_DB_URL  = process.env.MONGO_DB_URL;

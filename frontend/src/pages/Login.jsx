@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await fetch('https://mern-chat-app-task-backend.onrender.com/api/user/login',{
+      const res = await fetch('https://mern-chat-app-task-production.up.railway.app/api/user/login',{
         method: 'POST',
         headers: {
           'Content-Type':'application/json'
@@ -31,11 +31,11 @@ const Login = () => {
         setLoading(false);
         toast.success(data.message);
         setTimeout(() => {
-          navigate('/');
+          navigate('/chat');
         }, 500);
       }
       else{
-        setLoading(false);
+        // setLoading(false);
         toast.error(data.message);
         return;
       }
