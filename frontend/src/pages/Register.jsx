@@ -20,7 +20,6 @@ const Register = () => {
     try {
       setLoading(true);
       const res = await fetch('https://mern-chat-app-task-production.up.railway.app/api/user/register',{
-        mode:'no-cors',
         method: 'POST',
         headers: {
           'Content-Type':'application/json'
@@ -36,10 +35,12 @@ const Register = () => {
         }, 500);
       }
       else{
-        // setLoading(false);
+        setLoading(true);
         toast.error(data.message);
         return;
       }
+
+      e.target.reset();
       
     } catch (error) {
       toast.error(error.message);
