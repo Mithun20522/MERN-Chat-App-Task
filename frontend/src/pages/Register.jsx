@@ -55,12 +55,14 @@ const Register = () => {
             type="text" 
             id='username' 
             placeholder='john'
+            required
             onChange={handleChange} 
             className='border focus:outline-none placeholder:text-slate-500 p-3 rounded-md text-center' 
             />
             <input 
             type="email" 
             id='email' 
+            required
             placeholder='john@example.com' 
             onChange={handleChange} 
             className='border focus:outline-none placeholder:text-slate-500 p-3 rounded-md text-center' 
@@ -69,6 +71,7 @@ const Register = () => {
             type="password" 
             id='password' 
             placeholder='*********' 
+            required
             onChange={handleChange} 
             className='border focus:outline-none placeholder:text-slate-500 p-3 rounded-md text-center'  
             />

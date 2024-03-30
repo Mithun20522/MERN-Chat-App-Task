@@ -54,6 +54,7 @@ const Login = () => {
             type="email" 
             id='email' 
             placeholder='john@example.com' 
+            required
             onChange={handleChange} 
             className='border focus:outline-none placeholder:text-slate-500 p-3 rounded-md text-center' 
             />
@@ -62,6 +63,7 @@ const Login = () => {
             id='password' 
             placeholder='*********' 
             onChange={handleChange} 
+            required
             className='border focus:outline-none placeholder:text-slate-500 p-3 rounded-md text-center'  
             />
             <button disabled={loading} className='p-3 text-white font-semibold bg-slate-700 hover:bg-slate-900 rounded-md'>
