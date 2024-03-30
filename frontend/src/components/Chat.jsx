@@ -13,7 +13,7 @@ const Chat = () => {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [messages]);
 
 
 
