@@ -20,6 +20,7 @@ const Login = () => {
     try {
       setLoading(true);
       const res = await fetch('https://mern-chat-app-task-production.up.railway.app/api/user/login',{
+        mode:'no-cors',
         method: 'POST',
         headers: {
           'Content-Type':'application/json'

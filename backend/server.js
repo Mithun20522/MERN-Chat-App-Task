@@ -25,7 +25,7 @@ const io = new Server(server,{
 
 app.use(express.json());
 app.use(cookieParser());
-// app.use(cors());
+app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 const MONGO_DB_URL  = process.env.MONGO_DB_URL;

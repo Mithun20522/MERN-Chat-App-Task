@@ -6,6 +6,7 @@ const Header = () => {
  const handleLogOut = async() => {
     try {
         const res = await fetch('https://mern-chat-app-task-production.up.railway.app/api/user/logout', {
+            mode:'no-cors',
             method: 'POST'
         });
         const data = await res.json();
