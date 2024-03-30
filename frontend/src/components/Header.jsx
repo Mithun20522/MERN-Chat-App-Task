@@ -25,7 +25,7 @@ const Header = () => {
  }
   return (
     <header className='flex justify-end p-5'>
-        <button onClick={handleLogOut} className='px-3 py-1  mr-7 rounded-md bg-slate-700 hover:bg-slate-900 text-white font-semibold text-sm'>Log out</button>
+        {/* <button onClick={handleLogOut} className='px-3 py-1  mr-7 rounded-md bg-slate-700 hover:bg-slate-900 text-white font-semibold text-sm'>Log out</button> */}
         <Toaster/>
     </header>
   )

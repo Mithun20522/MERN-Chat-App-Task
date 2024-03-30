@@ -15,10 +15,10 @@ const Chat = () => {
     };
   }, []);
 
-  
+
 
   return (
-    <section>
+    <section className='px-24'>
         <Conversation messages ={messages}/>
     </section>
   )
