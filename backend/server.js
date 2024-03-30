@@ -7,6 +7,7 @@ import userRouter from './routes/user.route.js';
 import chatRouter from './routes/chat.route.js';
 import {createServer} from 'http';
 import { Server } from 'socket.io';
+import path from 'path';
 
 dotenv.config();
 
@@ -20,6 +21,8 @@ const io = new Server(server,{
       }
     
 });
+
+const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
@@ -37,6 +40,13 @@ mongoose.connect(MONGO_DB_URL)
 app.get('/',(req, res) => {
     res.send({message: 'Test API working'});
 })
+
+app.use(express.static(path.join(__dirname, '/frontend/dist')));
+
+app.get('*',(req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+});
+
 app.use('/api/user', userRouter);
 app.use('/api/chat/', chatRouter);
 
