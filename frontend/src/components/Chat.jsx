@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Conversation from './Conversation'
-
+import socket from '../socket';
 
 const Chat = () => {
-  const arr = [{message:"hello how are you?"}, {message:"Im fine at wysa"}, {message:"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium facere praesentium mollitia quis officia vero cupiditate omnis quibusdam quia fuga quasi placeat dolorum vel ut, labore illum voluptatem sed beatae."}];
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    socket.on('message', (message) => {
+      setMessages(prevMessages => [...prevMessages, message]);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+  
+
   return (
     <section>
-        <Conversation arr ={arr}/>
+        <Conversation messages ={messages}/>
     </section>
   )
 }

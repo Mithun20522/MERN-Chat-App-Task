@@ -12,11 +12,17 @@ dotenv.config();
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server,{
+    cors: {
+        origin: "http://localhost:5173",
+        methods: ["POST", "GET"],
+        credentials: true
+      }
+    
+});
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 const MONGO_DB_URL  = process.env.MONGO_DB_URL;
@@ -32,10 +38,33 @@ app.use('/api/user', userRouter);
 app.use('/api/chat/', chatRouter);
 
 
-// socket.io connections
 io.on('connection', (socket) => {
-    console.log('New user connected: ', socket.id);
-})
+    console.log('A user connected');
+  
+    // Emit messages with a delay
+    const messages = [
+      "Hi there! 👋",
+      "I'm Wysa - an AI chatbot built by therapists.",
+      "I'm here to understand your concerns and connect you with the best resources available to support you.",
+      "Can I help?"
+    ];
+  
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < messages.length) {
+        socket.emit('message', messages[index]);
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 2000);
+  
+    socket.on('disconnect', () => {
+      console.log('User disconnected');
+      clearInterval(interval);
+    });
+  });
+  
 
 //Server initialization
 server.listen(PORT, () => console.log(`Server started listening on PORT:${PORT}`));
