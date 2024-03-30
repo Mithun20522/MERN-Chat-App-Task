@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
       } else {
         clearInterval(interval);
       }
-    }, 2000);
+    }, 100);
   
     socket.on('disconnect', () => {
       console.log('User disconnected');
