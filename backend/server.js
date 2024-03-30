@@ -15,7 +15,7 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server,{
     cors: {
-        origin: "https://wysa-mern-chat-task.netlify.app",
+        origin: "https://mern-chat-app-task-wysa.vercel.app",
         methods: ["POST", "GET"],
         credentials: true
       }
